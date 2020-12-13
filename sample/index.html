@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <!--- livereload --->
+    <script type="text/javascript" src="http://localhost:5566/js/socket.io.js"></script>
+    <script type="text/javascript">
+      let socket = io.connect('http://localhost:7879');
+      socket.on('reload',(data)=>{
+        location.reload();
+      });
+    </script>
+    <!--- livereload --->
+
+    <!--- meta tags --->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <!--- meta tags --->
+
+    <title>
+      sample
+    </title>
+
+    <!--- css --->
+    <link rel="stylesheet" href="http://localhost:5566/css/master.css">
+	  <link rel="icon" href="http://localhost:5566/assets/favicon.ico" type="image/x-icon"/>
+	  <meta name="theme-color" content="#9E1818">
+    <!--- css --->
+
+  </head>
+  <body>
+
+    <!--- router --->
+    <div class="router" id="router">
+        <div class="page-loader" id="page-loader"></div>
+        <div class="page-router" id="page-router"></div>
+    </div>
+    <!--- router --->
+
+    <!--- web bundle --->
+    <script type="text/javascript" src="http://localhost:5566/js/bundle.js"></script>
+    <!--- web bundle --->
+
+  </body>
+</html>

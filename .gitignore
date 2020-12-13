@@ -1,0 +1,16 @@
+
+#npm
+**/node_modules/
+**/build/
+**/plugins/
+**/platforms/
+**/dist/
+**/chunks/
+
+#wasm
+**/target
+**/*.rs.bk
+**/Cargo.lock
+**/bin/
+**/pkg/
+**/wasm-pack.log
