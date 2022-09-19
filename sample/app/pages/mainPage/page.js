@@ -31,8 +31,9 @@ function build(){
 
 }
 
-const no_of_chunks = 5;
-const secs_per_chunk = 2;
+const no_of_chunks = 3;
+const secs_per_chunk = 3;
+let mime,audioBitsPerSecond,videoBitsPerSecond;
 
 async function make_links(parent,chunks){
   const JSZip = require("jszip");
@@ -43,10 +44,14 @@ async function make_links(parent,chunks){
   });
   let loop = 1;
   for(let item of chunks){
-
     zip.file("file_" + loop + ".webm",item);
     loop++;
   }
+  zip.file("mime.json",JSON.stringify({
+    mime:mime,
+    audioBitsPerSecond:audioBitsPerSecond,
+    videoBitsPerSecond:videoBitsPerSecond
+  },null,1));
   const make = await zip.generateAsync({type:"blob"})
   .then(function(content) {
       return content;
@@ -98,6 +103,15 @@ async function record(main){
       if(loop === no_of_chunks){recorder.stop();return;}
       data.push(event.data);
       loop++;
+    }
+    if(!audioBitsPerSecond){
+      audioBitsPerSecond = recorder.audioBitsPerSecond;
+    }
+    if(!mime){
+      mime = recorder.mimeType;
+    }
+    if(!videoBitsPerSecond){
+      videoBitsPerSecond = recorder.videoBitsPerSecond;
     }
     recorder.start(secs_per_chunk * 1000);
     recorder.onstop = ()=>{
